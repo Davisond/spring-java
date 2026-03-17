@@ -1,0 +1,43 @@
+package com.java.investimentos.controller;
+
+import com.java.investimentos.entity.User;
+import com.java.investimentos.service.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+
+//anotation p spring criar a classe no formato esperado, a controller vai ser a porta de entrada do projeto,
+// ela chama a service que vai chamar o banco de dados(pelo repository), retorna tudo p usuario que chamar a API
+@RestController //spring entender que é controller, classe de endpoint
+@RequestMapping("/v1/users")//define o caminho da url p chegar na api
+public class UserController {
+
+    //injeção de dependencia (explicado no userService
+    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping //mapeia requisicao
+    public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto){
+        var userId = userService.createUser(createUserDto);
+        return ResponseEntity.created(URI.create("/v1/users/" + userId.toString())).build();
+    }
+
+
+
+    @GetMapping("/{userId}") //mapeia requisicao
+    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
+
+        return null;
+    }
+
+
+
+
+
+
+
+
+}

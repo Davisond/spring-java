@@ -1,6 +1,11 @@
 package com.java.investimentos.entity;
 
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.annotation.processing.Generated;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity//indica ao spring criar e utilizar a classe como referencia no banco de dados
