@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 //anotation p spring criar a classe no formato esperado, a controller vai ser a porta de entrada do projeto,
 // ela chama a service que vai chamar o banco de dados(pelo repository), retorna tudo p usuario que chamar a API
@@ -19,13 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
+
     @PostMapping //mapeia requisicao
     public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto){
         var userId = userService.createUser(createUserDto);
         return ResponseEntity.created(URI.create("/v1/users/" + userId.toString())).build();
     }
-
-
 
     @GetMapping("/{userId}") //mapeia requisicao
     public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
@@ -36,14 +36,13 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
-
     }
 
+    @GetMapping
+    public ResponseEntity<List<User>> listUsers() {
+    var users = userService.listUsers();
 
+    return ResponseEntity.ok(users);
 
-
-
-
-
-
+    }
 }

@@ -8,6 +8,7 @@ import com.java.investimentos.entity.User;
 import com.java.investimentos.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,6 +37,9 @@ public class UserService {
         return userRepository.findById(UUID.fromString(userId));
     }
 
-
+    //------GET USERS
+    public List<User> listUsers() {
+       return userRepository.findAll(); 
+    }
 
 }
