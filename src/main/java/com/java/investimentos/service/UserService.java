@@ -8,6 +8,7 @@ import com.java.investimentos.entity.User;
 import com.java.investimentos.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,19 +21,21 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UUID createUser(CreateUserDto createUserDto){
 
+
+    //--------CREATE USER---------
+    public UUID createUser(CreateUserDto createUserDto){
         //Dto -> entity
         var entity = new User(null, createUserDto.username(), createUserDto.email(), createUserDto.password(), Instant.now(), null);
-
-
         var userSaved =  userRepository.save(entity);
-
-
         return userSaved.getUserId();
-
-
-
-
     }
+
+    //-------FIND BY ID-----------
+    public Optional<User> getUserById(String userId){
+        return userRepository.findById(UUID.fromString(userId));
+    }
+
+
+
 }

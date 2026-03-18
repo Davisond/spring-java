@@ -29,8 +29,14 @@ public class UserController {
 
     @GetMapping("/{userId}") //mapeia requisicao
     public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
+        var user = userService.getUserById(userId);
 
-        return null;
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 
