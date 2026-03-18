@@ -37,12 +37,20 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-
     @GetMapping
     public ResponseEntity<List<User>> listUsers() {
     var users = userService.listUsers();
 
     return ResponseEntity.ok(users);
+    }
+    @DeleteMapping("/{userId")
+    public ResponseEntity<Void> deleteById(@PathVariable("userId") String userId){
+    userService.deleteById(userId);
 
+    return ResponseEntity.noContent().build();
     }
 }
+
+
+
+
