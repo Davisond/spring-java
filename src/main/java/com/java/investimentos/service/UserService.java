@@ -4,6 +4,7 @@ package com.java.investimentos.service;
 //metodos
 
 import com.java.investimentos.controller.CreateUserDto;
+import com.java.investimentos.controller.UpdateUserDto;
 import com.java.investimentos.entity.User;
 import com.java.investimentos.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,25 @@ public class UserService {
     //------GET USERS
     public List<User> listUsers() {
        return userRepository.findAll();
+    }
+
+    //------UPDATE BY ID
+    public void updateUserById(String userId, UpdateUserDto updateUserDto){
+        var id = UUID.fromString(userId);
+        var userEntity = userRepository.findById(id);
+
+        if (userEntity.isPresent()){
+            var user = userEntity.get();
+
+            if (updateUserDto.username() != null){
+                user.setUsername(updateUserDto.username());
+            }
+            if (updateUserDto.password() != null){
+                user.setPassword(updateUserDto.password());
+            }
+
+            userRepository.save(user);
+        }
     }
 
     //-----DELETE BY ID
