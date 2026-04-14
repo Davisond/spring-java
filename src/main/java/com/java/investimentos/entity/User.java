@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.annotation.processing.Generated;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Entity//indica ao spring criar e utilizar a classe como referencia no banco de dados
@@ -33,6 +34,8 @@ public class User {
     @UpdateTimestamp
     private Instant updatedTimestamp;
 
+    @OneToMany(mappedBy = "user") //um(one) user pode ter muitas(many) accounts, mappped by é como fica em account
+    private List<Account> accounts;
 
     public User() {
     }
@@ -93,5 +96,13 @@ public class User {
 
     public void setUpdatedTimestamp(Instant updatedTimestamp) {
         this.updatedTimestamp = updatedTimestamp;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

@@ -14,6 +14,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID accountId;
 
+    @ManyToOne //varias(many) contas(accounts) podem ter somente um(one) usuario(useer)
+    @JoinColumn(name = "user_id")//coloca a fk do user (chave estrangeira) dentro da tabela de acounts
+    private User user; //uma conta vai ter exatamente um usuario
+
+
     @Column(name = "description")
     private String description;
 
