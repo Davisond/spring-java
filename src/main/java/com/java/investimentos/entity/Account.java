@@ -19,6 +19,7 @@ public class Account {
     private User user; //uma conta vai ter exatamente um usuario
 
     @OneToOne(mappedBy = "account")//mapped by é literal, indica como tá sendo indicado no BillingAdress
+    @PrimaryKeyJoinColumn//indicativo de que a primary key de BillingAdress vem de cá
     private BillingAddress billingAdress;
 
 
