@@ -3,10 +3,7 @@ package com.java.investimentos.entity;
 //endereco de cobranca
 //uma account pode ter somente um endereço de cobrança
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -16,6 +13,10 @@ public class BillingAddress {
 
     @Id
     private UUID id;
+
+    @OneToOne
+    @JoinColumn(name = "account_id")//FK(chave estrangeira) da tabela account
+    private Account account; //um endereco de cobranca esta relacionado a uma conta
 
     @Column(name = "street")
     private String street;
