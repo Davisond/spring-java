@@ -3,6 +3,7 @@ package com.java.investimentos.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +26,11 @@ public class Account {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "account") //uma conta pode ter quantas ações financeeiras quiser
+    private List<AccountStock> accountStocks;
+
+
 
     public Account() {
     }
