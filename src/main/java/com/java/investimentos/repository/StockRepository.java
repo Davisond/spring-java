@@ -11,7 +11,7 @@ import java.util.UUID;
 
 //implementa com o spring.data.jpa a implementação de ir no banco e fazer o insert da entity
 @Repository
-public interface StockRepository extends JpaRepository<Stock, UUID> {
+public interface StockRepository extends JpaRepository<Stock, String> {
 
 
 
