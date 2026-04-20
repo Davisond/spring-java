@@ -98,14 +98,15 @@ public class UserService {
             null,
             createAccountDto.description(),
             new ArrayList<>()
-
-
         );
+        var accountCreated = accountRepository.save(account);
 
-
-
-
-
-
+        var billingAddress = new BillingAddress(
+                accountCreated.getAccountId(),
+                account,
+                createAccountDto.street(),
+                createAccountDto.number()
+        );
+        billingAddressRepository.save(billingAddress);
     }
 }

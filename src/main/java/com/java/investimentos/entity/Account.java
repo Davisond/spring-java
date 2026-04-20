@@ -19,7 +19,7 @@ public class Account {
     @JoinColumn(name = "user_id")//coloca a fk do user (chave estrangeira) dentro da tabela de acounts
     private User user; //uma conta vai ter exatamente um usuario
 
-    @OneToOne(mappedBy = "account")//mapped by é literal, indica como tá sendo indicado no BillingAdress
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")//mapped by é literal, indica como tá sendo indicado no BillingAdress
     @PrimaryKeyJoinColumn//indicativo de que a primary key de BillingAdress vem de cá
     private BillingAddress billingAdress;
 
