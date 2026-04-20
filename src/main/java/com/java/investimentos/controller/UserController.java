@@ -1,5 +1,8 @@
 package com.java.investimentos.controller;
 
+import com.java.investimentos.controller.dto.CreateAccountDto;
+import com.java.investimentos.controller.dto.CreateUserDto;
+import com.java.investimentos.controller.dto.UpdateUserDto;
 import com.java.investimentos.entity.User;
 import com.java.investimentos.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +58,16 @@ public class UserController {
 
     return ResponseEntity.noContent().build();
     }
+
+    //criação da account
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<Void> deleteById(@PathVariable("userId") String userId, @RequestBody CreateAccountDto createAccountDto){
+        userService.createAccount(userId);
+
+        return ResponseEntity.ok().build();
+    }
+
+
 }
 
 

@@ -1,4 +1,4 @@
-package com.java.investimentos.controller;
+package com.java.investimentos.controller.dto;
 
 public record UpdateUserDto(String username, String password) {
 }

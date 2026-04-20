@@ -3,12 +3,21 @@ package com.java.investimentos.service;
 //amarração do que vem do controller e vai para o repository
 //metodos
 
-import com.java.investimentos.controller.CreateUserDto;
-import com.java.investimentos.controller.UpdateUserDto;
+import com.java.investimentos.controller.dto.CreateAccountDto;
+import com.java.investimentos.controller.dto.CreateUserDto;
+import com.java.investimentos.controller.dto.UpdateUserDto;
+import com.java.investimentos.entity.Account;
+import com.java.investimentos.entity.BillingAddress;
 import com.java.investimentos.entity.User;
+import com.java.investimentos.repository.AccountRepository;
+import com.java.investimentos.repository.BillingAddressRepository;
 import com.java.investimentos.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,8 +28,13 @@ public class UserService {
 
     //injeção de dependencia (precisa de outra classe dentro de uma classe sem insstanciar na mao) -> preciso usar a interface de repository dentro de service
     private UserRepository userRepository;
-    public UserService(UserRepository userRepository) {
+    private AccountRepository accountRepository;
+    private BillingAddressRepository billingAddressRepository;
+
+    public UserService(UserRepository userRepository, AccountRepository accountRepository, BillingAddressRepository billingAddressRepository) {
         this.userRepository = userRepository;
+        this.accountRepository = accountRepository;
+        this.billingAddressRepository = billingAddressRepository;
     }
 
 
@@ -73,4 +87,25 @@ public class UserService {
     }
 
 
+    public void createAccount(String userId, CreateAccountDto createAccountDto) {
+        var user = userRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));//Se passar user n existente -> not found
+
+        //dto -> entity
+
+        var account = new Account(
+            UUID.randomUUID(),
+            user,
+            null,
+            createAccountDto.description(),
+            new ArrayList<>()
+
+
+        );
+
+
+
+
+
+
+    }
 }

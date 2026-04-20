@@ -1,4 +1,4 @@
-package com.java.investimentos.controller;
+package com.java.investimentos.controller.dto;
 
 //Pra nao expor tudo no banco p API, cria-se esse meio termo, aqui eu só vou passar o que importa pra criar o usuario
 //entao o dto vai pedir só os campos que a gente precisa, username, email e password, agora só usar no controller
