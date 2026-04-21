@@ -3,6 +3,7 @@ package com.java.investimentos.service;
 //amarração do que vem do controller e vai para o repository
 //metodos
 
+import com.java.investimentos.controller.dto.AccountResponseDto;
 import com.java.investimentos.controller.dto.CreateAccountDto;
 import com.java.investimentos.controller.dto.CreateUserDto;
 import com.java.investimentos.controller.dto.UpdateUserDto;
@@ -108,5 +109,15 @@ public class UserService {
                 createAccountDto.number()
         );
         billingAddressRepository.save(billingAddress);
+    }
+
+    public List<AccountResponseDto> listAccounts(String userId) {
+        var user = userRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));//Se passar user n existente -> not found
+
+        return user.getAccounts()//Lista de users
+                .stream()
+                .map(ac ->//mapear -> recebe cada account e instancia um novo Dto coletando com toList
+                        new AccountResponseDto(ac.getAccountId().toString(),ac.getDescription()))
+                .toList();
     }
 }

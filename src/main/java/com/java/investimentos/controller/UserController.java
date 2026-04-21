@@ -1,5 +1,6 @@
 package com.java.investimentos.controller;
 
+import com.java.investimentos.controller.dto.AccountResponseDto;
 import com.java.investimentos.controller.dto.CreateAccountDto;
 import com.java.investimentos.controller.dto.CreateUserDto;
 import com.java.investimentos.controller.dto.UpdateUserDto;
@@ -65,6 +66,13 @@ public class UserController {
         userService.createAccount(userId, createAccountDto);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}/accounts")
+    public ResponseEntity<List<AccountResponseDto>> listAccounts(@PathVariable("userId") String userId){
+        var accounts = userService.listAccounts(userId);
+
+        return ResponseEntity.ok(accounts);
     }
 
 
