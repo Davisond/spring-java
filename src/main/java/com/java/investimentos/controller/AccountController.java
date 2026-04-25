@@ -32,6 +32,13 @@ public class AccountController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{accountId}/stocks")
+    public ResponseEntity<Void> listStocks(@PathVariable("accountId") String accountId){
+        accountService.listStocks(accountId);
+
+        return ResponseEntity.ok().build();
+    }
+
 
 
 
