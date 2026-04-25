@@ -66,4 +66,20 @@ public class Account {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public BillingAddress getBillingAdress() {
+        return billingAdress;
+    }
+
+    public void setBillingAdress(BillingAddress billingAdress) {
+        this.billingAdress = billingAdress;
+    }
+
+    public List<AccountStock> getAccountStocks() {
+        return accountStocks;
+    }
+
+    public void setAccountStocks(List<AccountStock> accountStocks) {
+        this.accountStocks = accountStocks;
+    }
 }

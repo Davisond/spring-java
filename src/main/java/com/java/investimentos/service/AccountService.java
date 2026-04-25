@@ -1,6 +1,8 @@
 package com.java.investimentos.service;
 
 
+import com.java.investimentos.controller.dto.AccountResponseDto;
+import com.java.investimentos.controller.dto.AccountStockResponseDto;
 import com.java.investimentos.controller.dto.AssociateAccountStockDto;
 import com.java.investimentos.controller.dto.CreateAccountDto;
 import com.java.investimentos.entity.AccountStock;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -47,6 +50,18 @@ public class AccountService {
 
 
     }
+
+    public List<AccountStockResponseDto> listStocks(String accountId) {
+        var account = accountRepository.findById(UUID.fromString(accountId)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));//verifica, se n existir joga exception
+
+        return account.getAccountStocks().stream()
+                .map(accountStock -> new AccountStockResponseDto(accountStock.
+                        getStock()
+                        .getStockId(),accountStock
+                        .getQuantity(),0.0))
+                        .toList();
+        
+    };
 
     //
 
