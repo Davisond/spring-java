@@ -60,7 +60,7 @@ public class AccountService {
                         .getStockId(),accountStock
                         .getQuantity(),0.0))
                         .toList();
-        
+
     };
 
     //
