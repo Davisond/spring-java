@@ -1,5 +1,103 @@
 # spring-java
 
+## Agregador de Investimentos API  
+
+  O presente projeto é uma API REST desenvolvida para atuar como o núcleo de um sistema agregador de investimentos. O objetivo principal é permitir que usuários gerenciem suas carteiras, contas de investimento e           acompanhem a performance de ativos (stocks) de forma centralizada.
+  
+  A aplicação resolve o problema da fragmentação de dados financeiros, oferecendo uma interface padronizada para operações de CRUD (Create, Read, Update, Delete) de usuários e, futuramente, integração com APIs de cotações em tempo real.
+
+## Tecnologias Utilizadas
+
+  Java 21: Utilização das últimas features da linguagem, como Records para DTOs, garantindo imutabilidade e código conciso.
+  
+  Spring Boot: Framework base que acelera o desenvolvimento através da configuração automática e servidor embutido.
+  
+  Spring Web: Utilizado para a criação dos endpoints RESTful e gerenciamento de requisições HTTP.
+  
+  Spring Data JPA: Abstração sobre o Hibernate para facilitar a persistência de dados e consultas ao banco sem a necessidade de SQL.
+  
+  MySQL e Hibernate: Banco de dados relacional para persistência, com o Hibernate atuando como ferramenta de ORM (Object-Relational Mapping).
+  
+  Docker: Containerização do banco de dados MySQL para garantir um ambiente de desenvolvimento idêntico em qualquer máquina.
+  
+  Maven: Gerenciador de dependências e automação de build.
+
+## Arquitetura do projeto
+
+  controller -> Porta de entrada: recebe requests HTTP e retorna respostas.
+  service -> Camada de Negócio: contém a lógica e regras da aplicação.
+  repository -> Camada de Dados: interfaces que comunicam com o banco (JPA).
+  entity -> Modelos de Dados: representação das tabelas do banco.
+  dto -> Objetos de Transferência: definem o contrato da API.
+
+## Fluxo da aplicação
+
+## Injeção de Dependência
+
+  O projeto utiliza o conceito de Inversão de Controle através da Injeção de Dependência do Spring. Em vez de a classe criar suas próprias instâncias (usando new), o Spring gerencia o ciclo de vida dos objetos.
+
+  Por que usar? Principalmente por desacoplamento, as classes dependem de abstrações, não de implementações concretas.
+  Exemplo de uso:
+
+  ```java
+// Exemplo de Injeção via Construtor
+@Service
+public class UserService {
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+}
+```
+
+## DTO 
+
+  Implementamos DTOs usando Java Records para garantir que a API não exponha diretamente as entidades do banco de dados.
+
+  Por que usar? Principalmente por segurança, o uso de DTO evita que campos como senha sejam expostos ou alterados indevidamente.
+  Exemplo de uso:
+
+```java
+//DTO para criação de usuário
+public record CreateUserDto(String username, String email, String password) {}
+```
+## Requisições para teste:
+
+Criar usuário (POST)
+http://localhost:8080/v1/users
+  ```json
+{
+  "username": "Davison",
+  "email": "davison@exemplo.com",
+  "password": "123"
+}
+```
+Listar Usuários (GET)
+http://localhost:8080/v1/users
+
+Buscar Usuário por ID (GET)
+http://localhost:8080//v1/users/{userId}
+
+Atualizar Usuário (PUT)
+http://localhost:8080//v1/users/{userId}
+  ```json
+{
+  "username": "Dava",
+  "password": "1234"
+}
+```
+
+Criar conta (POST)
+http://localhost:8080//v1/users/{userId}/accounts
+  ```json
+{
+ "description": "conta de investimentos",
+  "street": "myStreet",
+	"number": 500 
+}
+```
+
 ## DEPENDENCIAS DO PROJETO (start.spring.io)
   spring web  
   spring data jpa  
