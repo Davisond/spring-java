@@ -2,16 +2,17 @@ package com.java.investimentos.entity;
 
 
 import jakarta.persistence.*;
+import org.springframework.data.domain.Persistable;
 
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_accounts ")
+@Table(name = "tb_accounts")
 public class Account {
 
     @Id
-    @Column(name = "account_Id")
+    @Column(name = "account_id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID accountId;
 
@@ -21,7 +22,7 @@ public class Account {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")//mapped by é literal, indica como tá sendo indicado no BillingAdress
     @PrimaryKeyJoinColumn//indicativo de que a primary key de BillingAdress vem de cá
-    private BillingAddress billingAdress;
+    private BillingAddress billingAddress;
 
 
     @Column(name = "description")
@@ -35,10 +36,10 @@ public class Account {
     public Account() {
     }
 
-    public Account(UUID accountId, User user, BillingAddress billingAdress, String description, List<AccountStock> accountStocks) {
+    public Account(UUID accountId, User user, BillingAddress billingAddress, String description, List<AccountStock> accountStocks) {
         this.accountId = accountId;
         this.user = user;
-        this.billingAdress = billingAdress;
+        this.billingAddress = billingAddress;
         this.description = description;
         this.accountStocks = accountStocks;
     }
@@ -68,11 +69,11 @@ public class Account {
     }
 
     public BillingAddress getBillingAdress() {
-        return billingAdress;
+        return billingAddress;
     }
 
-    public void setBillingAdress(BillingAddress billingAdress) {
-        this.billingAdress = billingAdress;
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
     }
 
     public List<AccountStock> getAccountStocks() {
@@ -82,4 +83,5 @@ public class Account {
     public void setAccountStocks(List<AccountStock> accountStocks) {
         this.accountStocks = accountStocks;
     }
+
 }

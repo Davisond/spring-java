@@ -16,12 +16,14 @@ import com.java.investimentos.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class UserService {
@@ -89,27 +91,30 @@ public class UserService {
 
 
     public void createAccount(String userId, CreateAccountDto createAccountDto) {
-        var user = userRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));//Se passar user n existente -> not found
+        var user = userRepository.findById(UUID.fromString(userId))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao existe"));//Se passar user n existente -> not found
 
         //dto -> entity
+        var account = new Account();
 
-        var account = new Account(
-            UUID.randomUUID(),
-            user,
-            null,
-            createAccountDto.description(),
-            new ArrayList<>()
-        );
-        var accountCreated = accountRepository.save(account);
+        account.setUser(user);
+        account.setDescription(createAccountDto.description());
+        account.setAccountStocks(new ArrayList<>());
 
         var billingAddress = new BillingAddress(
-                accountCreated.getAccountId(),
+                account.getAccountId(),
                 account,
                 createAccountDto.street(),
                 createAccountDto.number()
         );
-        billingAddressRepository.save(billingAddress);
+
+        account.setBillingAddress(billingAddress);
+        accountRepository.save(account);
+
     }
+
+
+
 
     public List<AccountResponseDto> listAccounts(String userId) {
         var user = userRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));//Se passar user n existente -> not found
