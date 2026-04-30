@@ -20,7 +20,6 @@ public class StockController {
     public StockController(StockService stockService) {
         this.stockService = stockService;
     }
-
     @PostMapping //mapeia requisicao
     public ResponseEntity<Void> createStock(@RequestBody CreateStockDto createStockDto){
         stockService.createStock(createStockDto);

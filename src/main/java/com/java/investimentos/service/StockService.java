@@ -10,7 +10,6 @@ public class StockService {
 
     private StockRepository stockRepository;
 
-
     public StockService(StockRepository stockRepository) {
         this.stockRepository = stockRepository;
     }

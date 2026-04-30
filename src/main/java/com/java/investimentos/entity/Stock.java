@@ -18,9 +18,10 @@ public class Stock {
     public Stock() {
     }
 
-    public Stock(String description, String stockId) {
-        this.description = description;
+    public Stock(String stockId, String description) {
         this.stockId = stockId;
+        this.description = description;
+
     }
 
     public String getStockId() {
