@@ -64,7 +64,7 @@ public record CreateUserDto(String username, String email, String password) {}
 ```
 ## Requisições para teste:
 
-Criar usuário (POST)
+### Criar usuário (POST)
 http://localhost:8080/v1/users
   ```json
 {
@@ -73,14 +73,14 @@ http://localhost:8080/v1/users
   "password": "123"
 }
 ```
-Listar Usuários (GET)
+### Listar Usuários (GET)
 http://localhost:8080/v1/users
 
-Buscar Usuário por ID (GET)
-http://localhost:8080//v1/users/{userId}
+### Buscar Usuário por ID (GET)
+http://localhost:8080/v1/users/{userId}
 
-Atualizar Usuário (PUT)
-http://localhost:8080//v1/users/{userId}
+### Atualizar Usuário (PUT)
+http://localhost:8080/v1/users/{userId}
   ```json
 {
   "username": "Dava",
@@ -88,13 +88,49 @@ http://localhost:8080//v1/users/{userId}
 }
 ```
 
-Criar conta (POST)
-http://localhost:8080//v1/users/{userId}/accounts
+### Criar conta (POST)
+http://localhost:8080/v1/users/{userId}/accounts
   ```json
 {
  "description": "conta de investimentos",
   "street": "myStreet",
 	"number": 500 
+}
+```
+### Listar conta (GET)
+http://localhost:8080/v1/users/{userId}/accounts
+
+### Criar ação/stock (POST)
+http://localhost:8080/v1/stocks
+  ```json
+{
+ "stockId": "PETR4",
+  "description": "Petobras"
+}
+```
+
+### Associar stock com conta (POST)
+http://localhost:8080/v1/users/{accountId}/stocks
+  ```json
+{ 
+ "stockId": "PETR4",
+  "description": "Petobras"
+}
+```
+
+### Verificar stocks de determinada account (GET)
+http://localhost:8080/v1/accounts/{accountId}/stocks
+
+Obs: O último get faz requisição à API da Brapi para utilizar o regularMarketPrice, então, se faz necessário criar uma conta no site,
+gerar uma key e criar no projeto uma variável de ambiente no modelo: TOKEN -> key
+
+desta forma, quando testar, receberá como resposta um json como este:
+
+  ```json
+{ 
+	"stockId": "PETR4",
+	"quantity": 2,
+	"total": 98.16
 }
 ```
 
