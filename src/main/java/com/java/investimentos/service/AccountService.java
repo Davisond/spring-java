@@ -74,7 +74,19 @@ public class AccountService {
     private double getTotal(Integer quantity, String stockId) {
 
         var response = brapiClient.getQuote(TOKEN, stockId);
-        var price = response.Results().getFirst().regularMarketPrice();
+
+
+        var results = response.results();
+
+        if (results == null || results.isEmpty()) {
+            System.out.println("BRAPI sem dados para: " + stockId);
+            return 0.0;
+        }
+
+        var price = results.getFirst().regularMarketPrice();
+
+
+
 
         return quantity * price;
     }
