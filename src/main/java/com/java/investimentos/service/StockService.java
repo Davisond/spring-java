@@ -15,6 +15,8 @@ public class StockService {
     }
 
     public void createStock(CreateStockDto createStockDto) {
+        System.out.println("stockId: " + createStockDto.stockId());
+        System.out.println("description: " + createStockDto.description());
 
         //DTO -> entity
 
