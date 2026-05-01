@@ -30,8 +30,6 @@
   entity -> Modelos de Dados: representação das tabelas do banco.
   dto -> Objetos de Transferência: definem o contrato da API.
 
-## Fluxo da aplicação
-
 ## Injeção de Dependência
 
   O projeto utiliza o conceito de Inversão de Controle através da Injeção de Dependência do Spring. Em vez de a classe criar suas próprias instâncias (usando new), o Spring gerencia o ciclo de vida dos objetos.
