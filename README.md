@@ -106,6 +106,10 @@ http://localhost:8080/v1/stocks
   "description": "Petobras"
 }
 ```
+### No banco:
+<div align="center">
+  <img src="https://github.com/Davisond/spring-java/blob/main/stock.png?raw=true" width="300px" />
+</div>
 
 ### Associar stock com conta (POST)
 http://localhost:8080/v1/users/{accountId}/stocks
@@ -177,5 +181,5 @@ vai sinalizar a situação no terminal
 
 ## Diagrama ER da API
 <div align="center">
-  <img src="https://private-user-images.githubusercontent.com/93564378/577703738-a3e272b7-a479-4d99-b9fe-70e0287c52fd.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzYxMjY4MjksIm5iZiI6MTc3NjEyNjUyOSwicGF0aCI6Ii85MzU2NDM3OC81Nzc3MDM3MzgtYTNlMjcyYjctYTQ3OS00ZDk5LWI5ZmUtNzBlMDI4N2M1MmZkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjA0MTQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwNDE0VDAwMjg0OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTJlNDMxYzM2YjQwNTM1NGQ1NDNhMDQ0NjY4YjUxYWU3OThjYjkxNjdkODVjYmQ3MWMwMjc4N2E4NGI4ZTE4YmUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRnBuZyJ9.jejsu0gqn86Y70qhPTqPcFUeWnPu1VZlnkV1ZLBRqsA" width="700px" />
+  <img src="https://raw.githubusercontent.com/Davisond/spring-java/refs/heads/main/ER_agregador_investimentos.png" width="700px" />
 </div>
